@@ -1,0 +1,41 @@
+import xml.etree.ElementTree as ET
+import urllib
+from urllib2 import Request
+
+
+def get_count():
+    count = 0
+    for dataset_child in dataset_root:  # finding data tag
+        if(dataset_child.tag.split("}")[1][0:] == 'data'):
+            for data_child in dataset_child:  # @UnusedVariable
+                count += 1
+    return count
+
+
+def xstr(s):
+    if s is None:
+        return ''
+    return str(s)
+
+
+try:
+#     fob = open('/var/www/html/wildfires/bin/mushroom.xml' , 'rU')  # @IgnorePep8
+    request = Request ("http://nmil-dev1.jmc.asu.edu/wildfires/bin/mushroom.xml")
+    fob = urllib.urlopen(request)
+    mushroom_file_complete_text = fob.read()
+except Exception as e:
+    print(str(e))
+dataset_root = ET.fromstring(mushroom_file_complete_text)
+for i in range(get_count()):
+    title = xstr(dataset_root[1][i][2].text)
+    lat = xstr(dataset_root[1][i][7]
+               .text.replace(" ", ".", 1).replace(" ", ""))
+    lng = xstr(dataset_root[1][i][8]
+               .text.replace(" ", ".", 1).replace(" ", ""))
+    image_url = "http://api.tiles.mapbox.com/v3/examples.map-zr0njcqy/"
+    + lat + "," + lng + ",13/140x140.png"
+    print(image_url)
+
+    urllib.urlretrieve(image_url, "./" + title.replace(" ", "") + ".jpg")
+
+print('done!')

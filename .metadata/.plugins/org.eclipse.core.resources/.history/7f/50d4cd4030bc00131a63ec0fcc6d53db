@@ -1,0 +1,79 @@
+import xml.etree.ElementTree as ET
+import json
+
+
+def get_count():
+    count = 0
+    for dataset_child in dataset_root:  # finding data tag
+        if(dataset_child.tag.split("}")[1][0:] == 'data'):
+            for data_child in dataset_child:  # @UnusedVariable
+                count += 1
+    return count
+
+
+def xstr(s):
+    if s is None:
+        return ''
+    return str(s)
+
+
+try:
+#     fob = open('/var/www/html/wildfires/bin/mushroom.xml' , 'rU')  # @IgnorePep8
+    link = "http://nmil-dev1.jmc.asu.edu/wildfires/bin/mushroom.xml"
+    fob = requests.get(link)
+    mushroom_file_complete_text = fob.text
+except Exception as e:
+    print(str(e))
+dataset_root = ET.fromstring(mushroom_file_complete_text)
+number_of_rows = get_count()
+incident_array = []
+single_incident = {}
+old_year = "2003"
+for i in range(number_of_rows):
+    single_incident = {
+    'DateTime': xstr(dataset_root[1][i][0].text),
+    'Region': xstr(dataset_root[1][i][1].text),
+    'Fire': xstr(dataset_root[1][i][2].text),
+    'FireNumber': xstr(dataset_root[1][i][3].text),
+    'StateAbbreviation': xstr(dataset_root[1][i][4].text),
+    'Township': xstr(dataset_root[1][i][5].text),
+    'Range': xstr(dataset_root[1][i][6].text),
+    'Latitude': xstr(dataset_root[1][i][7].text.replace(" ", ".", 1).replace(" ", "")),
+    'Longitude': xstr(dataset_root[1][i][8].text.replace(" ", ".", 1).replace(" ", "")),
+    'FireClassSize': xstr(dataset_root[1][i][9].text),
+    'FsAcres': xstr(dataset_root[1][i][10].text),
+    'Elevation': xstr(dataset_root[1][i][11].text),
+    'SlopePercentage': xstr(dataset_root[1][i][12].text),
+    'Aspect': xstr(dataset_root[1][i][13].text),
+    'CoverClassDescription': xstr(dataset_root[1][i][14].text),
+    'DiscoveryCalendarYear': xstr(dataset_root[1][i][15].text),
+    }
+    year = dataset_root[1][i][0].text.split('-')[0]
+    if i == number_of_rows - 1:
+        incident_array.append(single_incident)
+        json_formatted_string = "callback({\"incidents\": " + str(json.dumps
+             (incident_array, indent=4, skipkeys=True, sort_keys=True) + "});")  # @IgnorePep8
+        try:
+            filename = "/var/www/html/wildfires/generated/" + year + ".json"
+            fd = open(filename, 'w')
+            fd.write(json_formatted_string)
+            fd.close()
+        except Exception as e:
+            print ('ERROR writing: {}'.format(e))
+        break
+    elif year == old_year:
+        incident_array.append(single_incident)
+    elif year != old_year:
+        print(old_year + "," + year)
+        json_formatted_string = "callback({\"incidents\": " + str(json.dumps
+             (incident_array, indent=4, skipkeys=True, sort_keys=True) + "});")  # @IgnorePep8
+        incident_array[:] = []
+        incident_array.append(single_incident)
+        try:
+            filename = "/var/www/html/wildfires/mushroom_result/" + old_year + ".json"
+            fd = open(filename, 'w')
+            fd.write(json_formatted_string)
+            fd.close()
+        except Exception as e:
+            print ('ERROR writing: {}'.format(e))
+    old_year = year

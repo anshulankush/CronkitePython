@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>jQuery.getJSON demo</title>
+<style>
+img {
+	height: 100px;
+	float: left;
+}
+</style>
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+<body>
+
+	<div id="images"></div>
+
+	<script>
+		(function() {
+			$
+					.ajax({
+						url : "http://nmil-dev1.jmc.asu.edu/wildfires/generated/2014.json",
+						dataType : 'jsonp', // You  need to use 'jsonp' here because it is cross domain request 
+						success : function(data) {
+							$
+									.each(
+											data,
+											function(index, value) {
+												alert(value.current_condition[0].cloudcover);
+												alert(value.current_condition[0].humidity);
+												alert(value.current_condition[0].weatherDesc[0].value);
+												alert(value.request[0].query);
+												alert(value.request[0].query);
+												$
+														.each(
+																value.weather,
+																function(i, val) {
+																	alert(val.precipMM);
+																	alert(val.weatherDesc[0].value);
+																})
+											});
+						}
+					});
+		})();
+	</script>
+
+</body>
+</html>

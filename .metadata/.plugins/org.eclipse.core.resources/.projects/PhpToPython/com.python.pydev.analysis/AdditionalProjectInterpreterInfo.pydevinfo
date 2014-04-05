@@ -1,0 +1,25 @@
+-- VERSION_4
+-- START DISKCACHE
+/Users/anshulchawla/Documents/Workspaces/CronkitePython/.metadata/.plugins/org.eclipse.core.resources/.projects/PhpToPython/com.python.pydev.analysis/v2_indexcache
+wildfire_python_parser|1395683297000|/Users/anshulchawla/Documents/Workspaces/CronkitePython/PhpToPython/wildfire_python_parser.py
+-- END DISKCACHE
+-- START DICTIONARY
+1
+1=wildfire_python_parser
+-- END DICTIONARY
+-- START TREE 1
+10
+fd|1|fd!11@
+fil|1|filename!11@
+fob|1|fob!11@
+geo|1|geo_namespaces!11@
+inc|2|incidents_dict!11@incidents!11@
+jso|1|json_formatted_string!11@
+old|1|old_json_string!11@
+rss|1|rss_content!11@
+url|2|url_response!11@url_request!11@
+xml|1|xml_root!11@
+-- END TREE
+-- START TREE 2
+0
+-- END TREE

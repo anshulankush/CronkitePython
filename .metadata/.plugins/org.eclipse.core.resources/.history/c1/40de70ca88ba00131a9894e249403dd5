@@ -1,0 +1,57 @@
+<html>
+<body>
+	<script src="jquery.js"></script>
+	<script
+		src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+	<script type="text/javascript">
+		$(document)
+				.ready(
+						function() {
+
+							alert('start');
+							var jqxhr = $
+									.getJSON(
+											"http://nmil-dev1.jmc.asu.edu/wildfires/generated/2014.json",
+											function(data) {
+												console.log("success");
+											}).done(function(data) {
+										alert('data ' + data.msg + " ," + data)
+									}).fail(function() {
+										alert("error");
+									}).always(function() {
+										alert("complete");
+									});
+							alert('end');
+							jqxhr.complete(function(data) {
+								alert('second data ' + data.msg + " ," + data)
+							});
+						});
+		
+		
+		
+		
+		
+	</script>
+
+<script>
+(function() {
+  var flickerAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
+  $.getJSON( flickerAPI, {
+    tags: "mount rainier",
+    tagmode: "any",
+    format: "json"
+  })
+    .done(function( data ) {
+      $.each( data.items, function( i, item ) {
+        $( "<img>" ).attr( "src", item.media.m ).appendTo( "#images" );
+        if ( i === 3 ) {
+          return false;
+        }
+      });
+    });
+})();
+</script>
+
+</body>
+</html>

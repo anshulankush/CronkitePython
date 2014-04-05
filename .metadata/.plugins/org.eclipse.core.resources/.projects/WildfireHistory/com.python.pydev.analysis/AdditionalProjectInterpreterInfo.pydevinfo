@@ -1,0 +1,39 @@
+-- VERSION_4
+-- START DISKCACHE
+/Users/anshulchawla/Documents/Workspaces/CronkitePython/.metadata/.plugins/org.eclipse.core.resources/.projects/WildfireHistory/com.python.pydev.analysis/v2_indexcache
+google_image_creator|1396646061000|/Users/anshulchawla/Documents/Workspaces/CronkitePython/WildfireHistory/google_image_creator.py
+mushroom_parser|1396640200000|/Users/anshulchawla/Documents/Workspaces/CronkitePython/WildfireHistory/mushroom_parser.py
+-- END DISKCACHE
+-- START DICTIONARY
+2
+1=google_image_creator
+2=mushroom_parser
+-- END DICTIONARY
+-- START TREE 1
+22
+dat|2|dataset_root!11@dataset_root!19@
+f|0|
+fd|1|fd!19@
+fil|1|filename!19@
+fob|1|fob!19@
+get|2|get_count!10@get_count!18@
+ima|1|image_url!11@
+inc|1|incident_array!19@
+jso|1|json_formatted_string!19@
+lat|1|lat!11@
+lin|0|
+lng|1|lng!11@
+mus|1|mushroom_file_complete_text!19@
+myf|0|
+num|1|number_of_rows!19@
+old|1|old_year!19@
+req|0|
+res|0|
+sin|1|single_incident!19@
+tit|1|title!11@
+xst|2|xstr!18@xstr!10@
+yea|1|year!19@
+-- END TREE
+-- START TREE 2
+0
+-- END TREE

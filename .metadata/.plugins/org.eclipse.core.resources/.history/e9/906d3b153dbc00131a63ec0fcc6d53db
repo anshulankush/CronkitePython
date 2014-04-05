@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARCHVE - RAW</title>
+
+<!-- Bootstrap -->
+<link
+	href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"
+	rel="stylesheet">
+<!-- Gannett Custom CSS -->
+<link rel="stylesheet" href="gannett.css">
+<!-- Font Awesome -->
+<link
+	href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"
+	rel="stylesheet">
+<!-- Carousel Custom CSS -->
+<link rel="stylesheet" href="carousel.css">
+
+<style type="text/css">
+#map_canvas {
+	width: 100%;
+	height: 100%;
+}
+
+#dialog {
+	z-index: 99999999999999;
+}
+
+@font-face {
+	font-family: 'Futura Today';
+	src:
+		url(http://www.gannett-cdn.com/azcentral/static/uscp-web-static-15.3.0/fonts//futura_today_normal.eot);
+	src:
+		url(http://www.gannett-cdn.com/azcentral/static/uscp-web-static-15.3.0/fonts//futura_today_normal.eot?#iefix)
+		format('embedded-opentype'),
+		url(http://www.gannett-cdn.com/azcentral/static/uscp-web-static-15.3.0/fonts//futura_today_normal.woff)
+		format('woff'),
+		url(http://www.gannett-cdn.com/azcentral/static/uscp-web-static-15.3.0/fonts//futura_today_normal.ttf)
+		format('truetype'),
+		url(http://www.gannett-cdn.com/azcentral/static/uscp-web-static-15.3.0/fonts//futura_bold-webfont.svg#FuturaBold)
+		format('svg');
+	font-style: normal
+}
+
+@font-face {
+	font-family: 'Futura Today Bold';
+	src:
+		url(http://www.gannett-cdn.com/azcentral/static/uscp-web-static-15.3.0/fonts//futura_today_bold.eot);
+	src:
+		url(http://www.gannett-cdn.com/azcentral/static/uscp-web-static-15.3.0/fonts//futura_today_bold.eot?#iefix)
+		format('embedded-opentype'),
+		url(http://www.gannett-cdn.com/azcentral/static/uscp-web-static-15.3.0/fonts//futura_today_bold.woff)
+		format('woff'), url(../../fonts/futura_today_bold.ttf)
+		format('truetype'),
+		url(http://www.gannett-cdn.com/azcentral/static/uscp-web-static-15.3.0/fonts//futura_bold-webfont.svg#FuturaBold)
+		format('svg');
+	font-style: normal
+}
+
+@font-face {
+	font-family: 'Futura Today Light';
+	src:
+		url(http://www.gannett-cdn.com/azcentral/static/uscp-web-static-15.3.0/fonts//futura_today_light.eot);
+	src:
+		url(http://www.gannett-cdn.com/azcentral/static/uscp-web-static-15.3.0/fonts//futura_today_light.eot?#iefix)
+		format('embedded-opentype'),
+		url(http://www.gannett-cdn.com/azcentral/static/uscp-web-static-15.3.0/fonts//futura_today_light.woff)
+		format('woff'), url(../../fonts/futura_today_light.ttf)
+		format('truetype'),
+		url(http://www.gannett-cdn.com/azcentral/static/uscp-web-static-15.3.0/fonts//futura_today_light.svg#FuturaLight)
+		format('svg');
+	font-style: light
+}
+</style>
+
+
+</head>
+
+<body>
+	<!-- BEGIN NAVIGATION -->
+	<div class="navbar-wrapper">
+		<div class="container">
+			<div class="navbar navbar-default navbar-fixed-top navbar-azc"
+				role="navigation">
+				<div class="container">
+
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse"
+							data-target=".navbar-collapse">
+							<span class="sr-only">Mobile Navigation Menu</span> <span
+								class="icon-bar"></span> <span class="icon-bar"></span> <span
+								class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand brandactive" href="index.html"> <i
+							class="fa fa-fire-extinguisher fa-lg fire-out"></i> <span
+							class="logo-fire">Fire</span> <span class="logo-tracker">Tracker</span></a>
+					</div>
+					<div class="navbar-collapse collapse">
+						<ul class="nav navbar-nav">
+							<li><a href="map.html"><i class="fa fa-map-marker fa-lg"></i>
+									Map</a></li>
+							<li><a href="archive.html"><i
+									class="fa fa-archive fa-lg"></i> Wildfire History <span
+									class="badge">129</span></a></li>
+							<li><a href="impact.html"><i
+									class="fa fa-bullseye fa-lg"></i> Impact</a></li>
+						</ul>
+						<ul class="nav navbar-nav navbar-right">
+							<li><button type="button" class="btn btn-primary"
+									style="font-family: 'Futura Today Bold', Helvetica; margin-top: 8px;">
+									<i class="fa fa-rocket fa-lg"></i> <a href="action.html"
+										style="color: #fff; text-decoration: none;">ACTION</a>
+								</button></li>
+							<li class="divider"></li>
+							<li class="logo-fb"><a href="http://facebook.com/azcentral"><i
+									class="fa fa-facebook-square fa-lg"></i></a></li>
+							<li class="logo-twitter"><a
+								href="http://twitter.com/azcentral"><i
+									class="fa fa-twitter-square fa-lg"></i></a></li>
+							<li class="logo-insta"><a
+								href="http://instagram.com/azcentral"><i
+									class="fa fa-instagram fa-lg"></i></a></li>
+						</ul>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- END NAVIGATION -->
+		<!-- PAGE START -->
+		<div class="container">
+			<div class="page-header">
+				<h1>
+					Wildfire History <small
+						style="font-family: Arial, sans-serif; font-weight: 600;">Explore
+						the azcentral Fire Database</small>
+				</h1>
+			</div>
+			<nav class="navbar navbar-static-top" role="navigation"
+				style="font-family: arial; font-weight: bold;">
+				<div class="container-fluid">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse"
+							data-target="#bs-example-navbar-collapse-1">
+							<span class="sr-only">Toggle navigation</span> <span
+								class="icon-bar"></span> <span class="icon-bar"></span> <span
+								class="icon-bar"></span>
+						</button>
+					</div>
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse"
+						id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav navbar-inverted">
+							<li class="active"><a onclick="test('2014')">All</a></li>
+							<li><a onclick="test('2013')">2013</a></li>
+							<li><a onclick="test('2012')">2012</a></li>
+							<li><a onclick="test('2011')">2011</a></li>
+							<li><a onclick="test('2010')">2010</a></li>
+							<li><a onclick="test('2009')">2009</a></li>
+							<li><a onclick="test('2008')">2008</a></li>
+							<li><a onclick="test('2007')">2007</a></li>
+							<li><a onclick="test('2006')">2006</a></li>
+							<li><a onclick="test('2005')">2005</a></li>
+							<li><a onclick="test('2004')">2004</a></li>
+							<li><a onclick="test('2003')">2003</a></li>
+						</ul>
+						<form class="navbar-form navbar-right" role="search">
+							<div class="form-group">
+								<input type="text" class="form-control" placeholder="Search">
+							</div>
+							<button type="submit" class="btn btn-default">Submit</button>
+
+						</form>
+
+					</div>
+					<!-- /.navbar-collapse -->
+				</div>
+				<!-- /.container-fluid -->
+			</nav>
+			<p>SORT BY
+			<div class="btn-group">
+				<button type="button" class="btn btn-danger">Action</button>
+				<button type="button" class="btn btn-danger dropdown-toggle"
+					data-toggle="dropdown">
+					<span class="caret"></span> <span class="sr-only">Toggle
+						Dropdown</span>
+				</button>
+				<ul class="dropdown-menu" role="menu">
+					<li><a href="#">Action</a></li>
+					<li><a href="#">Another action</a></li>
+					<li><a href="#">Something else here</a></li>
+					<li class="divider"></li>
+					<li><a href="#">Separated link</a></li>
+				</ul>
+			</div>
+			</p>
+			<!--BEGIN ARCHIVE GRID -->
+			<div id="dialog" title="Basic dialog" style="display: none;">
+				<div id="map_canvas">
+					<!-- <img
+						src="http://maps.googleapis.com/maps/api/staticmap?center=-111,35&zoom=6&size=500x500&maptype=roadmap18&sensor=false" />
+				 -->
+				</div>
+			</div>
+
+			<div class="row" id="rowFireData"></div>
+			<!-- /END THE FEATURETTES -->
+
+
+			<!-- FOOTER -->
+			<footer>
+				<p class="pull-right">
+					<a href="#">Back to top</a>
+				</p>
+				<p>
+					&copy; 2014 Cronkite School / ASU &middot; <a href="#">Privacy</a>
+					&middot; <a href="#">Terms</a>
+				</p>
+			</footer>
+
+		</div>
+
+		<!-- /.container -->
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="holder.js"></script>
+		<!-- <script src="jquery.js"></script> -->
+		<!-- <script
+			src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> -->
+		<link rel="stylesheet"
+			href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+		<link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.css'
+			rel='stylesheet' />
+		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+		<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script
+			src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+		<script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.js'></script>
+
+		<!-- "http://nmil-dev1.jmc.asu.edu/wildfires/generated/2004.json" -->
+		<script>
+			function test(data) {
+				document.getElementById('rowFireData').innerHTML = "";
+				(function() {
+					$
+							.ajax({
+								/* url : "../" + data + ".json", */
+								url : "http://nmil-dev1.jmc.asu.edu/wildfires/generated/"
+										+ data + ".json",
+								dataType : 'json', // You  need to use 'jsonp' here because it is cross domain request 
+								success : function(data) {
+									$
+											.each(
+													data,
+													function(index, value) {
+
+														$
+																.each(
+																		value,
+																		function(
+																				i,
+																				val) {
+
+																			$(
+																					'#rowFireData')
+																					.append(
+																							"<div class=\"col-sm-6\">"
+																									+ "<div class=\"panel panel-default\">"
+																									+ "<div class=\"panel-heading\">"
+																									+ "<h3 class=\"panel-title\">"
+																									+ val.Fire
+																									+ "</h3>"
+																									+ "</div>"
+																									+ "<div class=\"panel-body\">"
+																									+ "<div class=\"row\">"
+																									+ "<div class=\"col-sm-4\">"
+																									+ "<img onclick=\"showDialog('"
+																									+ val.Fire
+																									+ "', '"
+																									+ val.Latitude
+																									+ "','"
+																									+ val.Longitude
+																									+ "')\" src = \"http://maps.googleapis.com/maps/api/staticmap?center="
+																									+ val.Latitude
+																									+ ", "
+																									+ val.Longitude
+																									+ "&zoom=6&size=140x140&markers=%7Ccolor:red%7Clabel:"
+																									+ val.Fire
+																									+ "%7C"
+																									+ val.Latitude
+																									+ ", "
+																									+ val.Longitude
+																									+ "&maptype=roadmap18&sensor=false\"\>"
+																									+ "</div>"
+																									+ "<span class=\"text-right\">Last Updated: X days ago</span>"
+																									+ "<div class=\"col-sm-8\">"
+																									+ "<div class=\"table-responsive\">"
+																									+ "<table class=\"table\">"
+																									+ "<thead>"
+																									+ "<tr style=\"text-align: center; color: #333; font-size: 3em;\">"
+																									+ "<td><span class=\"glyphicon glyphicon-fire\"></span></td>"
+																									+ "<td><i class=\"fa fa-fire-extinguisher fa-lg\"></i></td>"
+																									+ "</tr>"
+																									+ "</thead>"
+																									+ "<tbody>"
+																									+ "<tr style=\"font-weight: 900; font-size: 26px; text-align: center;\">"
+																									+ "<td style=\"padding: 15px;\"><span class=\"label label-warning wildfires\">"
+																									+ val.FsAcres
+																									+ "</span></td>"
+																									+ "<td style=\"padding: 15px;\"><span class=\"label label-warning acres\">"
+																									+ val.SlopePercentage
+																									+ "</span></td>"
+																									+ "</tr>"
+																									+ "<tr style=\"font-weight: 500; font-size: 15px; text-align: center; text-transform: uppercase; letter-spacing: -1px;\">"
+																									+ "<td>acres burned</td>"
+																									+ "<td>contained</td>"
+																									+ "</tr>"
+																									+ "</tbody>"
+																									+ "</table>"
+																									+ "</div>"
+																									+ "</div>"
+																									+ "</div>"
+																									+ "</div>"
+																									+ "</div>"
+																									+ "</div>");
+
+																		})
+
+													});
+
+								}
+							});
+				})();
+			}
+		</script>
+		<script>
+			function showDialog(title, lat, lng) {
+				var w = $(window).width();
+				var h = $(window).height();
+				$("#dialog").dialog({
+					title : "Map",
+					closeOnEscape : true,
+					height : h - 100,
+					width : w - 100,
+					modal : true,
+					open : function(event, ui) {
+						var map = L.mapbox.map('map_canvas', 'examples.map-9ijuk24y')
+					    .setView([lat, lng], 9);
+						L.mapbox.featureLayer({
+						    // this feature is in the GeoJSON format: see geojson.org
+						    // for the full specification
+						    type: 'Feature',
+						    geometry: {
+						        type: 'Point',
+						        // coordinates here are in longitude, latitude order because
+						        // x, y is the standard for GeoJSON and many formats
+						        coordinates: [lng, lat]
+						    },
+						    properties: {
+						        title: title,
+						        // one can customize markers by adding simplestyle properties
+						        // http://mapbox.com/developers/simplestyle/
+						        'marker-size': 'large',
+						        'marker-color': '#f0a'
+						    }
+						}).addTo(map);
+						/*  var mapCanvas = document.getElementById('map_canvas');
+						var myLatlng = new google.maps.LatLng(lat, lng);
+						var mapOptions = {
+							center : myLatlng,
+							zoom : 9,
+							mapTypeId : google.maps.MapTypeId.ROADMAP
+						}
+						var map = new google.maps.Map(mapCanvas, mapOptions);
+
+						var marker = new google.maps.Marker({
+							position : myLatlng,
+							map : map,
+							title : title 
+						}); */
+
+						/* $('#dialogMap')
+								.text(
+										 "var map = new google.maps.Map();" 
+										 "<img src = \"http://maps.googleapis.com/maps/api/staticmap?center="
+												+ lat
+												+ ", "
+												+ lng
+												+ "&zoom=6&size="
+												+ w
+												- 100
+												+ "x"
+												+ h
+												- 100
+												+ "&markers=%7Ccolor:red%7Clabel:"
+												+ title
+												+ "%7C"
+												+ lat
+												+ ", "
+												+ lng
+												+ "&maptype=roadmap18&sensor=false\"\>"); 
+						 */},
+					buttons : {
+						close : function() {
+							
+							$(this).dialog("close"); 
+							 
+						}
+
+					}
+				});
+			}
+		</script>
+		<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+		<script>
+			(function() {
+				$
+						.ajax({
+							/* url : "../2003.json", */
+							url : "http://nmil-dev1.jmc.asu.edu/wildfires/generated/2014.json",
+							dataType : 'json', // You  need to use 'jsonp' here because it is cross domain request 
+							success : function(data) {
+								$
+										.each(
+												data,
+												function(index, value) {
+
+													$
+															.each(
+																	value,
+																	function(i,
+																			val) {
+
+																		$(
+																				'#rowFireData')
+																				.append(
+																						"<div class=\"col-sm-6\">"
+																								+ "<div class=\"panel panel-default\">"
+																								+ "<div class=\"panel-heading\">"
+																								+ "<h3 class=\"panel-title\">"
+																								+ val.Fire
+																								+ "</h3>"
+																								+ "</div>"
+																								+ "<div class=\"panel-body\">"
+																								+ "<div class=\"row\">"
+																								+ "<div class=\"col-sm-4\">"
+																								+ "<img onclick=\"showDialog('"
+																								+ val.Fire
+																								+ "', '"
+																								+ val.Latitude
+																								+ "','"
+																								+ val.Longitude
+																								+ "')\" src = \"http://maps.googleapis.com/maps/api/staticmap?center="
+																								+ val.Latitude
+																								+ ", "
+																								+ val.Longitude
+																								+ "&zoom=6&size=140x140&markers=%7Ccolor:red%7Clabel:"
+																								+ val.Fire
+																								+ "%7C"
+																								+ val.Latitude
+																								+ ", "
+																								+ val.Longitude
+																								+ "&maptype=roadmap18&sensor=false\"\>"
+																								+ "</div>"
+																								+ "<span class=\"text-right\">Last Updated: X days ago</span>"
+																								+ "<div class=\"col-sm-8\">"
+																								+ "<div class=\"table-responsive\">"
+																								+ "<table class=\"table\">"
+																								+ "<thead>"
+																								+ "<tr style=\"text-align: center; color: #333; font-size: 3em;\">"
+																								+ "<td><span class=\"glyphicon glyphicon-fire\"></span></td>"
+																								+ "<td><i class=\"fa fa-fire-extinguisher fa-lg\"></i></td>"
+																								+ "</tr>"
+																								+ "</thead>"
+																								+ "<tbody>"
+																								+ "<tr style=\"font-weight: 900; font-size: 26px; text-align: center;\">"
+																								+ "<td style=\"padding: 15px;\"><span class=\"label label-warning wildfires\">"
+																								+ val.FsAcres
+																								+ "</span></td>"
+																								+ "<td style=\"padding: 15px;\"><span class=\"label label-warning acres\">"
+																								+ val.SlopePercentage
+																								+ "</span></td>"
+																								+ "</tr>"
+																								+ "<tr style=\"font-weight: 500; font-size: 15px; text-align: center; text-transform: uppercase; letter-spacing: -1px;\">"
+																								+ "<td>acres burned</td>"
+																								+ "<td>contained</td>"
+																								+ "</tr>"
+																								+ "</tbody>"
+																								+ "</table>"
+																								+ "</div>"
+																								+ "</div>"
+																								+ "</div>"
+																								+ "</div>"
+																								+ "</div>"
+																								+ "</div>");
+
+																	})
+
+												});
+
+							}
+						});
+			})();
+		</script>
+</body>
+</html>
